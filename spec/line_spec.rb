@@ -29,12 +29,12 @@ describe(Line) do
     end
   end
 
-  describe(".find") do
+  describe(".find_by_id") do
     it("returns a line when you input an id") do
       test_line = Line.new({:name => "Green", :id => nil})
       test_line.save()
       test_line_id = test_line.id()
-      expect(Line.find(test_line_id)).to(eq(test_line))
+      expect(Line.find_by_id(test_line_id)).to(eq(test_line))
     end
   end
 
@@ -42,40 +42,14 @@ describe(Line) do
     it("associates stations with the given line (ie, it creates stops)") do
       test_line = Line.new({:name => "Green", :id => nil})
       test_line.save()
-      test_line_id = test_line.id()
       test_station1 = Station.new({:name => "Abbotsville", :id => nil})
       test_station1.save()
-      test_station1_id = test_station1.id()
+      ts1n = test_station1.name()
       test_station2 = Station.new({:name => "Barrytown", :id => nil})
       test_station2.save()
-      test_station2_id = test_station2.id()
-      test_line.associate(test_station1)
-      test_line.associate(test_station2)
+      ts2n = test_station2.name()
+      test_line.associate([ts1n, ts2n])
       expect(test_line.stations()).to(eq([test_station1, test_station2]))
     end
   end
-
-
-  # describe("#stations") do
-  #   it("return all stations by line name") do
-  #     test_line = Line.new({:name => "Black", :id => nil})
-  #     test_line.save()
-  #     test_line_id = test_line.id()
-  #     test_station = Station.new({:name => "Abbotsville", :id => nil})
-  #     test_station.save()
-  #     test_station_id = test_station.id()
-  #
-
-
-
-
-
-
-
-
-
-
-
-
-
 end
