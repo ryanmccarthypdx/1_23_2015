@@ -18,12 +18,17 @@ post('/post_line') do
   @line_name = params.fetch("line_name")
   new_line = Line.new({ :name => @line_name, :id => nil })
   new_line.save()
+  @title = "JaqRy Railways"
+  @list_of_lines = Line.all()
+  @list_of_stations = Station.all()
+  erb(:main)
+end
+
+post('/patch_line') do
+  @line_name = params.fetch("line_name")
   @station_string = params.fetch("station_names_string")
-  @station_string.split(", ").each() do |station_name|
-    new_station = Station.new
-
-
-  new_line.associate(@station_string)
+  @line_obj = Line.find_by_name(@line_name)
+  @line_obj.associate(@station_string)
   @title = "JaqRy Railways"
   @list_of_lines = Line.all()
   @list_of_stations = Station.all()
@@ -34,7 +39,17 @@ post('/post_station') do
   @station_name = params.fetch("station_name")
   new_station = Station.new({ :name => @station_name, :id => nil })
   new_station.save()
-  new_station.associate(params.fetch("line_names_string"))
+  @title = "JaqRy Railways"
+  @list_of_lines = Line.all()
+  @list_of_stations = Station.all()
+  erb(:main)
+end
+
+post('/patch_station') do
+  @station_name = params.fetch("station_name")
+  @line_string = params.fetch("line_names_string")
+  @station_obj = Station.find_by_name(@station_name)
+  @station_obj.associate(@line_string)
   @title = "JaqRy Railways"
   @list_of_lines = Line.all()
   @list_of_stations = Station.all()

@@ -1,0 +1,11 @@
+<h1><%= @title %></h1>
+
+<h4>Here are the stations served by the <%= @title %>:</h4>
+<h5>Click on a station to see the connecting trains available.</h5>
+  <ul>
+  <% @stations_list.each() do |station| %>
+    <li><a href='/stations/<%= station.id() %>'><%= station.name() %></a></li>
+  <% end %>
+</ul>
+<br />
+<p><a href="/">Click here to return to our homepage</a></p>

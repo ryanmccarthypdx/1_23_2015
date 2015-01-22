@@ -1,0 +1,11 @@
+<h1><%= @title %></h1>
+
+<h4>Here are the lines that stop at <%= @title %>:</h4>
+<h5>Click on a line to see their destinations.</h5>
+  <ul>
+  <% @lines_list.each() do |line| %>
+    <li><a href='/lines/<%= line.id() %>'><%= line.name() %></a></li>
+  <% end %>
+</ul>
+<br />
+<p><a href="/">Click here to return to our homepage</a></p>

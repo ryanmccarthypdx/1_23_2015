@@ -37,7 +37,7 @@ attr_reader(:id, :name)
   end
 
   define_singleton_method(:find_by_name) do |name_input|
-    find_result = DB.exec("SELECT * FROM stations WHERE name = #{name_input};")
+    find_result = DB.exec("SELECT * FROM stations WHERE name = '#{name_input}';")
     name = find_result.first().fetch("name")
     id = find_result.first().fetch("id").to_i()
     Station.new({ :name => name, :id => id})
