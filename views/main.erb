@@ -1,0 +1,37 @@
+<h1>Thank for choo-choo-choosing JaqRy Railways!</h1>
+
+<h2>JaqRy's Lines</h2>
+<ul>
+  <% @list_of_lines.each() do |line| %>
+    <li><a href='/lines/<%= line.id() %>'><%= line.name() %></a></li>
+  <% end %>
+</ul>
+<br />
+
+<h3>FOR JAQRY EMPLOYEE USE ONLY: Add a new line</h3>
+<form action='/post_line' method='post'>
+  <label for='line_name'>Line name:</label>
+  <input id='line_name' name='line_name' type='text' placeholder='Green'>
+  <label for='station_names_string'>Stations this line serves:</label>
+  <input id='station_names_string' name='station_names_string' type='text' placeholder='North Haverbrook, Hooverville'>
+  <button type='submit' class='btn btn-primary'>Add This Line</button>
+</form>
+<br />
+
+<h2>Communities Served by JaqRy</h2>
+<ul>
+  <% @list_of_stations.each() do |station| %>
+    <li><a href='/stations/<%= station.id() %>'><%= station.name() %></a></li>
+  <% end %>
+</ul>
+<br />
+
+<h3>FOR JAQRY EMPLOYEE USE ONLY: Add a new station</h3>
+<form action='/post_station' method='post'>
+  <label for='station_name'>Line name:</label>
+  <input id='station_name' name='station_name' type='text' placeholder='Hooverville'>
+  <label for='line_names_string'>Stations this line serves:</label>
+  <input id='line_names_string' name='line_names_string' type='text' placeholder='Green, Blue'>
+  <button type='submit' class='btn btn-primary'>Add This Station</button>
+</form>
+<br />

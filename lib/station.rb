@@ -1,4 +1,4 @@
-require('line')
+require('./lib/line')
 require('pry')
 
 class Station
@@ -37,13 +37,14 @@ attr_reader(:id, :name)
   end
 
   define_singleton_method(:find_by_name) do |name_input|
-    find_result = DB.exec("SELECT * FROM stations WHERE name = '#{name_input}';")
+    find_result = DB.exec("SELECT * FROM stations WHERE name = #{name_input};")
     name = find_result.first().fetch("name")
     id = find_result.first().fetch("id").to_i()
     Station.new({ :name => name, :id => id})
   end
 
-  define_method(:associate) do |lines_to_associate|
+  define_method(:associate) do |lines_to_associate_string|
+    lines_to_associate = lines_to_associate_string.split(", ")
     @station_id = self.id()
     lines_to_associate.each() do |line|
       @line_id = Line.find_by_name(line).id()

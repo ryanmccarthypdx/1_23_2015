@@ -1,4 +1,4 @@
-require('station')
+require('./lib/station')
 require('pry')
 
 class Line
@@ -43,7 +43,8 @@ attr_reader(:id, :name)
     Line.new({ :name => name, :id => id})
   end
 
-  define_method(:associate) do |stations_to_associate|
+  define_method(:associate) do |stations_to_associate_string|
+    stations_to_associate = stations_to_associate_string.split(", ")
     @line_id = self.id()
     stations_to_associate.each() do |station|
       @station_id = Station.find_by_name(station).id()
@@ -57,11 +58,11 @@ attr_reader(:id, :name)
     @line_id = self.id()
     station_id_search_result = DB.exec("SELECT * FROM stops WHERE line_id = #{@line_id};")
     station_id_search_result.each() do |station|
-      stop_id = station.fetch('station_id')#############################
+      stop_id = station.fetch('station_id')
       station_ids.push(stop_id)
     end
     station_ids.each() do |station_id_on_line|
-      s_i_r = DB.exec("SELECT * FROM stations WHERE id = '#{station_id_on_line}';")##################
+      s_i_r = DB.exec("SELECT * FROM stations WHERE id = '#{station_id_on_line}';")
       name = s_i_r.first().fetch("name")
       stations_objects_output.push(Station.new({ :name => name, :id => (station_id_on_line.to_i) }))
     end
