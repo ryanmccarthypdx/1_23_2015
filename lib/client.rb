@@ -27,8 +27,8 @@ class Client
     DB.exec("DELETE FROM clients *;")
   end
 
-  define_method(:==) do |another_task|
-    self.name().==(another_task.name()).&(self.stylist_id().==(another_task.stylist_id()))
+  define_method(:==) do |another_client|
+    self.name().==(another_client.name()).&(self.stylist_id().==(another_client.stylist_id()))
   end
 
 end

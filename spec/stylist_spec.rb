@@ -37,7 +37,7 @@ describe(Stylist) do
       expect(test_stylist.clients()).to(eq([]))
     end
 
-    it('returns all the client objects for a given stylist alphabetically by first name') do
+    it('returns an arry of the client objects for a given stylist alphabetically by first name') do
       test_stylist = Stylist.new({:name => "Charlene", :id => nil})
       test_stylist.save()
       test_client1 = Client.new({:id => nil, :name => "Marge Simpson", :phone => "503-555-1212", :stylist_id => test_stylist.id() })

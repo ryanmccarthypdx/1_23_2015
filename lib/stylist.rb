@@ -1,5 +1,3 @@
-# require('client')
-
 class Stylist
   attr_reader(:name, :id)
 
