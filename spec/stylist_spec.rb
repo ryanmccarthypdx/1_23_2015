@@ -40,9 +40,9 @@ describe(Stylist) do
     it('returns an arry of the client objects for a given stylist alphabetically by first name') do
       test_stylist = Stylist.new({:name => "Charlene", :id => nil})
       test_stylist.save()
-      test_client1 = Client.new({:id => nil, :name => "Marge Simpson", :phone => "503-555-1212", :stylist_id => test_stylist.id() })
+      test_client1 = Client.new({ :id => nil, :name => "Marge Simpson", :phone => "503-555-1212", :stylist_id => test_stylist.id() })
       test_client1.save()
-      test_client2 = Client.new({:id => nil, :name => "Edna Krabapple", :phone => "503-555-1234", :stylist_id => test_stylist.id() })
+      test_client2 = Client.new({ :id => nil, :name => "Edna Krabapple", :phone => "503-555-1234", :stylist_id => test_stylist.id() })
       test_client2.save()
       expect(test_stylist.clients()).to(eq([test_client2, test_client1]))
     end
