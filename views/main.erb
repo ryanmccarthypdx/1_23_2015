@@ -1,0 +1,34 @@
+<h1>Reception Management System for Clay Matthews' House of Beauty</h1>
+<br />
+<h2>Here are your stylists and their clients</h2>
+<ul>
+  <% @list_of_stylists.each() do |stylist| %>
+    <li><%= stylist.name() %>:</li>
+    <% stylist.clients().each() do |client| %>
+      <ul>
+        <li><%= client.name() %>, <% client.phone() %></li>
+      </ul>
+</ul>
+
+<br />
+<h4>Hire a new stylist</h4>
+<form action='/stylist_post' method='post'>
+  <label for='stylist_name'>Stylist name:</label>
+  <input id='stylist_name' name='stylist_name' type='text' placeholder='Floyd Barber'>
+  <button type='submit' class='btn btn-primary'>Add Stylist</button>
+</form>
+
+<h4>Add a new client</h4>
+<form action='/client_post' method='post'>
+  <label for='client_name'>Client name:</label>
+  <input id='client_name' name='client_name' type='text' placeholder='Floyd Barber'>
+  <label for='phone'>Client phone:</label>
+  <input id='phone' name='phone' type='text' placeholder='503-555-1212'>
+  <label for='stylist_id'>Client's Stylist:</label>
+  <select id='stylist_id' name='stylist_id' type='text'>
+    <% @list_of_stylists.each() do |stylist| %>
+    <option value="<%= stylist.id()%>"> <%= stylist.name() %> </option>
+    <% end %>
+  </select>
+  <button type='submit' class='btn btn-primary'>Add Stylist</button>
+</form>
