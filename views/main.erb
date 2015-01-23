@@ -1,27 +1,32 @@
-<h1>Reception Management System for Clay Matthews' House of Beauty</h1>
+<h2>Clay Matthews' House of Beauty</h2>
+<h4>Reception Management System</h4>
 <br />
-<h2>Here are your stylists and their clients</h2>
-<ul>
-  <% @list_of_stylists.each() do |stylist| %>
-    <li><%= stylist.name() %>:</li>
-    <% stylist.clients().each() do |client| %>
-      <ul>
-        <li><%= client.name() %>, <% client.phone() %></li>
-      </ul>
-</ul>
+<h3>Here are your stylists and their clients</h3>
+<% if @list_of_stylists.any?() %>
+  <ul>
+    <% @list_of_stylists.each() do |stylist| %>
+      <li><%= stylist.name() %></li>
+      <% stylist.clients().each() do |client| %>
+        <ul>
+          <li><%= client.name() %>, <%= client.phone() %></li>
+        </ul>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
 
 <br />
-<h4>Hire a new stylist</h4>
+<h5>Hire a new stylist</h5>
 <form action='/stylist_post' method='post'>
   <label for='stylist_name'>Stylist name:</label>
   <input id='stylist_name' name='stylist_name' type='text' placeholder='Floyd Barber'>
   <button type='submit' class='btn btn-primary'>Add Stylist</button>
 </form>
 
-<h4>Add a new client</h4>
+<h5>Add a new client</h5>
 <form action='/client_post' method='post'>
   <label for='client_name'>Client name:</label>
-  <input id='client_name' name='client_name' type='text' placeholder='Floyd Barber'>
+  <input id='client_name' name='client_name' type='text' placeholder='Marge Simpson'>
   <label for='phone'>Client phone:</label>
   <input id='phone' name='phone' type='text' placeholder='503-555-1212'>
   <label for='stylist_id'>Client's Stylist:</label>
@@ -30,5 +35,5 @@
     <option value="<%= stylist.id()%>"> <%= stylist.name() %> </option>
     <% end %>
   </select>
-  <button type='submit' class='btn btn-primary'>Add Stylist</button>
+  <button type='submit' class='btn btn-primary'>Add Client</button>
 </form>
