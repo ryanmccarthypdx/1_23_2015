@@ -11,17 +11,17 @@ sinatra-contrib
 pg
 ```
 ### Setup Your Database
-```
-This program is designed for use with PostgreSQL.  Database should be named 'salon', with tables 'clients' and 'stylist'.  Table clients should include columns id, name, phone, and stylist_id.  Table stylist should include columns id, and name.  
-#OR YOU CAN JUST RUN THIS SCRIPT:
 
+This program is designed for use with PostgreSQL.  Database should be named 'salon', with tables 'clients' and 'stylist'.  Table clients should include columns id, name, phone, and stylist_id.  Table stylist should include columns id, and name.  
+###OR YOU CAN JUST RUN THIS SCRIPT:
+```
 CREATE DATABASE salon;
 \c salon;
 CREATE TABLE stylists (id serial PRIMARY KEY, name varchar);
 CREATE TABLE clients (id serial PRIMARY KEY, name varchar, phone varchar, stylist_id int);
-
-#And to use rspec, be sure to add this line:
-
+```
+###And if you want to run rspec, be sure to add this line:
+```
 CREATE DATABASE salon_test WITH TEMPLATE salon;
 
 ```
