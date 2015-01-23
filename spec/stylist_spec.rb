@@ -37,14 +37,14 @@ describe(Stylist) do
       expect(test_stylist.clients()).to(eq([]))
     end
 
-    it('returns all the client objects for a given stylist by the stylists id number') do
+    it('returns all the client objects for a given stylist alphabetically by first name') do
       test_stylist = Stylist.new({:name => "Charlene", :id => nil})
       test_stylist.save()
-      test_task = Task.new({:id => nil, :name => "Marge Simpson", :phone => "503-555-1212", :stylist_id => test_stylist.id() })
-      test_task.save()
-      test_task2 = Task.new({:id => nil, :name => "Maude Flanders", :phone => "503-555-1234", :stylist_id => test_stylist.id() })
-      test_task2.save()
-      expect(test_stylist.clients()).to(eq([test_task2, test_task]))
+      test_client1 = Client.new({:id => nil, :name => "Marge Simpson", :phone => "503-555-1212", :stylist_id => test_stylist.id() })
+      test_client1.save()
+      test_client2 = Client.new({:id => nil, :name => "Edna Krabapple", :phone => "503-555-1234", :stylist_id => test_stylist.id() })
+      test_client2.save()
+      expect(test_stylist.clients()).to(eq([test_client2, test_client1]))
     end
   end
 
