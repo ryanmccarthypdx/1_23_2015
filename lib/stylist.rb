@@ -1,7 +1,4 @@
 # require('client')
-require('pry')
-
-
 
 class Stylist
   attr_reader(:name, :id)
@@ -33,26 +30,21 @@ class Stylist
     returned_clients.each() do |client|
       name = client.fetch("name")
       stylist_id = client.fetch("stylist_id").to_i()
-      due_date = client.fetch("due_date")
-      recreated_task = (Task.new({:name => name, :stylist_id => stylist_id, :due_date => due_date}))
-      clients.push(recreated_task)
+      phone = client.fetch("phone")
+      recreated_client = (Client.new({:name => name, :stylist_id => stylist_id, :phone => phone}))
+      clients.push(recreated_client)
     end
     clients
   end
 
-  define_singleton_method(:sel) do |id|
-    selection = []
-    select_result = DB.exec("SELECT * FROM stylists WHERE id = #{id};")
-    select_result.each() do |result| #even though i know it's only a single possible return; this is kinda stupid
-      name = result.fetch("name")
-      stylist_id = result.fetch("id")
-      selection.push(Stylist.new({ :name => name, :id => stylist_id}))
-    end
-    selection[0]
+  define_singleton_method(:find) do |find_id|
+    select_result = DB.exec("SELECT * FROM stylists WHERE id = #{find_id};")
+    name = select_result.first().fetch("name")
+    Stylist.new({ :name => name, :id => find_id})
   end
 
 
-  define_method(:==) do |another_list|
-    self.name().==(another_list.name()).&(self.id().==(another_list.id()))
+  define_method(:==) do |another_stylist|
+    self.name().==(another_stylist.name()).&(self.id().==(another_stylist.id()))
   end
 end
